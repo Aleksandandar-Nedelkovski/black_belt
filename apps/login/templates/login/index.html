@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Registration</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login/css/styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <style>
+        .error{
+            color: red;
+            font-weight: bold;
+        }
+        .success{
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div> <br>
+            <div class="col-6">
+                <h1>Welcome to Handy Helper</h1> <br>
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div class="col"></div>
+        </div>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-3">
+                <h2>Registration</h2> <br>
+                <form action="/register" , method="POST">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">First Name:</span>
+                        </div>
+                        <input type="text" name="first_name" placeholder="Your first name" class="form-control"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Last Name:</span>
+                        </div>
+                        <input type="text" name="last_name" placeholder="Your last name" class="form-control"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Email:</span>
+                        </div>
+                        <input type="text" name="email" placeholder="Your email" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Password:</span>
+                        </div>
+                        <input type="password" name="password" placeholder="Your password" class="form-control"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Password:</span>
+                        </div>
+                        <input type="password" name="confirm" placeholder="Confirm password" class="form-control"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <p> <a> <button type="submit" class="btn btn-primary">Register</button></a></p>
+                </form>
+            </div>
+            <div class="col-3">
+                <h2>Login</h2>
+                <form action="/login" , method="POST"> <br>
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Email:</span>
+                        </div>
+                        <input type="text" name="email" placeholder="Your name" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Password:</span>
+                        </div>
+                        <input type="password" name="password" placeholder="Your password" class="form-control"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <p> <a> <button type="submit" class="btn btn-primary">Login</button></a></p>
+                </form>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</body>
+
+</html>

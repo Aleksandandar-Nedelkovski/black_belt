@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>View Job | Handy Helper</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login/css/styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <style>
+        #description {
+        border: 1px solid black;
+        padding: 15px;
+        margin-bottom: 5px;
+        display: inline-block;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div> <br>
+            <div class="col-6"> <br>
+                {% for j in all_jobs %}
+                <h1> {{j.title}} </h1> <br>
+                <div id='description'>
+                    <p>Description: {{j.desc}} </p>
+                    <p>Location: {{j.location}} </p>
+                    <p>Posted by: {{j.uploaded_by.first_name}} {{j.uploaded_by.last_name}}</p>
+                    <p>Created at: {{j.created_at}} </p>
+                </div>
+                <form action="add_favorite/{{j.id}}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="job_id" value="{{j.id}}">
+                    <button type="submit" class="btn btn-primary">Add To My Jobs</button>
+                </form>
+                {% endfor %}
+
+            </div>
+            <div class="col"><br>
+                <a href="/dashboard"> <button type="button" class="btn btn-light">Dashboard</button> </a>
+                <a href="/logout"> <button type="button" class="btn btn-dark">Log out</button> </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

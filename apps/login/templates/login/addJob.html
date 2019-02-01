@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Job | Handy Helper</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login/css/styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div> <br>
+            <div class="col-6"> <br>
+                <h1>Add Job</h1> <br>
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <form action="addjob" method="POST">
+                    {%csrf_token%}
+                    <p>Title: <input class="form-control" name ="title" type="text" placeholder="Title"></p>
+                    <p>Description: <textarea class="form-control is-invalid" name="desc" id="validationTextarea"
+                            placeholder="Please describe"></textarea></p>
+                    <p>Location: <input class="form-control" type="text" name ="location" placeholder="Location"></p>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+
+                </form>
+            </div>
+            <div class="col"><br>
+                <a href="/dashboard"> <button type="button" class="btn btn-light">Dashboard</button> </a>
+                <a href="/logout"> <button type="button" class="btn btn-dark">Log out</button> </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

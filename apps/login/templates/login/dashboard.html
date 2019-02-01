@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Handy Helper Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'login/css/styles.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <style>
+        hr {
+    border: 1px solid black;
+}
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <br>
+                <h4>Welcome {{user.first_name}}</h4> 
+            </div>
+            <div class="col-md-auto"> <br>
+                <a href="/logout"> <button type="button" class="btn btn-dark">Log out</button> </a>
+            </div>
+            <div class="col col-lg-2"> <br>
+                <a href="/add_job">Add a job </a>
+            </div>
+        </div>
+        <!--header end-->
+        <hr>
+
+        <div class="row justify-content-md-center">
+            <div class="col ">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Job</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job in all_jobs %}
+                        <tr>
+                            <td>{{job.title}}</td>
+                            <td>{{job.location}}</td>
+                            <td><a href="view/{{job.id}}"> <button type="button" class="btn btn-primary btn-sm">View</button>
+                                </a>
+                                <a href="add_favorite/{{job.id}}"> <button type="submit" class="btn btn-success btn-sm">Add
+                                        Fav</button> </a>
+                                {% if job.uploaded_by.first_name == user.first_name %}
+                                <a href="edit/{{job.id}}"><button type="button" class="btn btn-secondary btn-sm">Edit</button></a>
+                                <a href="delete_fav/{{job.id}}">
+                                    <button type="button" class="btn btn-danger btn-sm">Cancel</button>
+                                </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col col-lg-4">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">My Jobs</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    {% for fav in fav_jobs %}
+                    <tbody>
+                        <tr>
+                            <td>{{fav.title}}</td>
+                            <td><a href="view/{{fav.id}}"> <button type="button" class="btn btn-primary btn-sm">View</button>
+                                </a>
+                                <a href="delete_fav/{{fav.id}}">
+                                    <button type="button" class="btn btn-danger btn-sm">Done</button>
+                                </a> </td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <!--container end-->
+
+</body>
+
+</html>
